@@ -10,6 +10,7 @@ before_action :authenticate_user!
   def index
     @books = Book.all
     @book = Book.new
+    @comments = @book.comments
   end
 
   def create
