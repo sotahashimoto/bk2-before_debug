@@ -17,9 +17,6 @@
 	<%= link_to '', edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
 </div>
 
-<p><%=link_to "フォロー", follows_user_path(user) %></p>
-<p><%=link_to "フォロワー", followers_user_path(user) %></p>
-
 <% if current_user != user %>
   <% if user.followed_by?(current_user) %>
     <p><%=link_to "フォロー済み", user_relationships_path(user.id), method: :delete %></p>
@@ -28,5 +25,5 @@
   <% end %>
 <% end %>
 
-<td>フォロー数<%= user.followings.count %></td>
-              <td>フォロワー数<%= user.followers.count %></td>
+<td>フォロー数<%=link_to user.followings.count, follows_user_path(user) %></td>
+              <td>フォロワー数<%=link_to user.followers.count, followers_user_path(user) %></td>
