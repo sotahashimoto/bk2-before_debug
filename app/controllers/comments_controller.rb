@@ -1,21 +1,20 @@
 class CommentsController < ApplicationController
   def create
-  @book = Book.find(params[:book_id])
-  @comment = @book.comments.new(comment_params)
-  @comment.user_id = current_user.id
-    if @comment.save
-      flash[:success] = "コメントしました"
-      # redirect_back(fallback_location: root_path)
-    else
-      # redirect_back(fallback_location: root_path)
-    end
+    @book = Book.find(params[:book_id])
+    @comment = current_user.comments.new(comment_params)
+    @comment.book_id = @book.id
+    @comment.save
+    @comment = Comment.new
+    @comments = @book.comments
+    flash[:success] = "コメントしました"
   end
 
   def destroy
     @book = Book.find(params[:book_id])
     @comment = @book.comments.find(params[:id])
+    @comments = @book.comments
     @comment.destroy
-    redirect_back(fallback_location: root_path)
+    @comment = Comment.new
   end
 
   private

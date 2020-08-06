@@ -1,0 +1,3 @@
+$('#comments').val()
+$(".comment").html("<%= j(render partial: 'books/comment', locals: { book: @book, comment: @comment}) %>");
+$(".commentindex").html("<%= j(render partial: 'books/commentindex', locals: { comments: @comments}) %>");

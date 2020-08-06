@@ -30,23 +30,19 @@
 					<% end %>
 				</tr>
 			</table>
-			  <tr>
-				  <% @comments.each do |c| %>
-				　  <td><%= attachment_image_tag c.user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", format: 'jpeg' %></td>
-				    <td><%= c.content %></td>
-            <% if c.user == current_user %>
-				      <td><%= link_to "Destroy", book_comment_path(c.book.id, c.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} %><br></td>
-				    <% else %>
-				　　　　<td><br></td>
-				    <% end %>
-				    <td><%= c.user.name %><br></td>
-				  <% end %>
-			  </tr>
-				<!-- コメント機能　非同期　ここから -->
-				<td class=<%= "coment-" + @book.id.to_s %>>
-					<%= render partial: "comment", locals: { f: @book, f: @comment } %>
-				</td>
-				<!-- コメント機能　非同期　ここまで -->
+
+			<!-- コメント表示非同期　ここから -->
+      <div class="commentindex" >
+        <%= render partial: "commentindex", locals: { comments: @book.comments } %>
+      </div>
+      <!-- コメント表示非同期　ここまで -->
+
+      <!-- コメント投稿非同期　ここから -->
+      <div class="comment" >
+        <%= render partial: "comment", locals: { comment: @comment, book: @book } %>
+      </div>
+      <!-- コメント投稿非同期　ここまで -->
+
 		</div>
 	</div>
 </div>

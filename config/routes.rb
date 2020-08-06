@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     get :followers, on: :member
   end
   resources :books do
-    resource :favorites
-    resources :comments
+    resource :favorites, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy]
   end
   root 'home#top'
   get 'home/about'
