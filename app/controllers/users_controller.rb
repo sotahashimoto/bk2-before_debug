@@ -39,6 +39,10 @@ class UsersController < ApplicationController
     @users = user.followers
   end
 
+  def fruit_address
+  @a = "%s %s"%([self.fruit_address2,self.fruit_address3])
+end
+
   private
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)

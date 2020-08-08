@@ -66,4 +66,14 @@ class User < ApplicationRecord
   end
   # =======================================================================
 
+
+  # ====================geocoded導入===================================
+  def address
+    "%s %s"%([self.prefecture_code,self.city,self.street])
+  end
+
+  geocoded_by :address
+  after_validation :geocode
+  # ===================================================================
+
 end
